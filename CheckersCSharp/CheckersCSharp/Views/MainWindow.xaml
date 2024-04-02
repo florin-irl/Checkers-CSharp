@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:CheckersCSharp"
         mc:Ignorable="d"
         Title="Checkers-CSharp-Laika-Software" Height="600" Width="600"
-        Icon="Assets/Icon.ico">
-	<Grid>
+        Icon="Assets/Icon.ico"
+        WindowStartupLocation="CenterScreen">
+	<Grid x:Name="BoardGrid">
         <Grid.Background>
             <ImageBrush ImageSource="Assets/Board.png"/>
         </Grid.Background>
