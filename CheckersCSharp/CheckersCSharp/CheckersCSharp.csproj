@@ -64,6 +64,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Direction.cs" />
+    <Compile Include="Models\Pieces\King.cs" />
+    <Compile Include="Models\Pieces\Piece.cs" />
+    <Compile Include="Models\Pieces\Soldier.cs" />
     <Compile Include="Models\PieceType.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Position.cs" />
