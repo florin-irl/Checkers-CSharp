@@ -10,9 +10,6 @@ namespace CheckersCSharp.Models.Pieces
     {
         public abstract EPieceType Type { get; }
         public abstract EPlayer Color { get; }
-
-        public bool IsKing { get; set; } = false;
-
         public abstract Piece Copy();
     }
 }
