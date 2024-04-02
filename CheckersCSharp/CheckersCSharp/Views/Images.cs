@@ -1,4 +1,5 @@
 ﻿using CheckersCSharp.Models;
+using CheckersCSharp.Models.Pieces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +42,15 @@ namespace CheckersCSharp.Views
         public static ImageSource GetImage(EPlayer color, EPieceType type)
         {
             return color == EPlayer.White ? whiteSources[type] : blackSources[type];
+        }
+
+        public static ImageSource GetImage(Piece piece)
+        {
+            if(piece==null)
+            {
+                return null;
+            }
+            return GetImage(piece.Color, piece.Type);
         }
     } 
 }
