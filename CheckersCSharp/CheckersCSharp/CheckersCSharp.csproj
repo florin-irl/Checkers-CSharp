@@ -98,5 +98,24 @@
     <Folder Include="Models\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Board.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\CursorB.cur" />
+    <Resource Include="Views\Assets\CursorW.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\BlackKing.png" />
+    <Resource Include="Views\Assets\BlackSoldier.png" />
+    <Resource Include="Views\Assets\WhiteKing.png" />
+    <Resource Include="Views\Assets\WhiteSoldier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Assets\Icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
