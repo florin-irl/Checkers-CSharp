@@ -45,5 +45,10 @@ namespace CheckersCSharp.Models
         {
             return !(left == right);
         }
+
+        public static Position operator +(Position a, Direction b)
+        {
+            return new Position(a.Row + b.RowDelta, a.Column + b.ColumnDelta);
+        }
     }
 }
