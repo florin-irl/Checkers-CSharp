@@ -27,7 +27,44 @@ namespace CheckersCSharp.Models
         {
             get
             {
-                return this[pos.Row,pos.Col];
+                return this[pos.Row,pos.Column];
+                
+            }
+            set
+            {
+                this[pos.Row,pos.Column] = value;
+            }
+        }
+
+        public static Board Initial()
+        {
+            Board board = new Board();
+            board.AddStartPieces();
+            return board;
+        }
+
+        private void AddStartPieces()
+        {
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    if ((row + col) % 2 == 1)
+                    {
+                        this[row, col] = new Soldier(EPlayer.White);
+                    }
+                }
+            }
+
+            for (int row = 5; row < 8; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    if ((row + col) % 2 == 1)
+                    {
+                        this[row, col] = new Soldier(EPlayer.Black);
+                    }
+                }
             }
         }
     }
