@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckersCSharp.Models.Pieces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,13 @@ namespace CheckersCSharp.Models.Moves
         {
             FromPos = fromPos;
             ToPos = toPos;
+        }
+
+        public override void Execute(Board board)
+        {
+            Piece piece = board[FromPos];
+            board[ToPos] = piece;
+            board[FromPos] = null;
         }
     }
 }
