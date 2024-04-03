@@ -39,6 +39,8 @@ namespace CheckersCSharp
             gameState = new GameState(EPlayer.Black, Board.Initial());
 
             DrawBoard(gameState.Board);
+
+            SetCursor(gameState.CurrentPlayer);
         }
 
         private void InitializeBoard()
@@ -123,6 +125,7 @@ namespace CheckersCSharp
         {
             gameState.MakeMove(move);
             DrawBoard(gameState.Board);
+            SetCursor(gameState.CurrentPlayer);
         }
 
         private void CacheMoves(IEnumerable<Move> moves)
@@ -152,6 +155,18 @@ namespace CheckersCSharp
             foreach(Position to in moveCache.Keys)
             {
                 highlights[to.Row, to.Column].Fill = Brushes.Transparent;
+            }
+        }
+
+        private void SetCursor(EPlayer player)
+        {
+            if(player == EPlayer.White)
+            {
+                Cursor = CheckersCursors.WhiteCursor;
+            }
+            else
+            {
+                Cursor = CheckersCursors.BlackCursor;
             }
         }
     }
