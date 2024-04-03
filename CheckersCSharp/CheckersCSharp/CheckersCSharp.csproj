@@ -66,6 +66,7 @@
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Direction.cs" />
     <Compile Include="Models\GameState.cs" />
+    <Compile Include="Models\MoveType.cs" />
     <Compile Include="Models\Pieces\King.cs" />
     <Compile Include="Models\Pieces\Piece.cs" />
     <Compile Include="Models\Pieces\Soldier.cs" />
