@@ -12,6 +12,14 @@ namespace CheckersCSharp.Models.Pieces
 
         public override EPlayer Color { get; }
 
+        private static readonly Direction[] dirs = new Direction[]
+        {
+            Direction.NorthWest,
+            Direction.NorthEast,
+            Direction.SouthWest,
+            Direction.SouthEast
+        }
+
         public King(EPlayer color)
         {
             Color = color;
