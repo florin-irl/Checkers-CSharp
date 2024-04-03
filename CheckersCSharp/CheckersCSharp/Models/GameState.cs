@@ -45,23 +45,28 @@ namespace CheckersCSharp.Models
         {
             if(move.Execute(Board))
             {
-                Position pos = move.ToPos;
-                Piece piece = Board[pos];
-                if(piece.Color == EPlayer.Black)
-                {
-                    BlackPieces--;
-                }
-                else
-                {
-                    WhitePieces--;
-                }
-                //Console.WriteLine("Black: " + BlackPieces + " White: " + WhitePieces);
+                UpdatePieceCounter(move);
             }
             if(!MultipleJumps)
             {
                 CurrentPlayer = CurrentPlayer.Opponent();
             }
             
+        }
+
+        public void UpdatePieceCounter(Move move)
+        {
+            Position pos = move.ToPos;
+            Piece piece = Board[pos];
+            if (piece.Color == EPlayer.Black)
+            {
+                WhitePieces--;
+            }
+            else
+            {
+                BlackPieces--;
+            }
+            Console.WriteLine("Black: " + BlackPieces + " White: " + WhitePieces);
         }
     }
 }
