@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckersCSharp.Models.Moves;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace CheckersCSharp.Models.Pieces
             Direction.NorthEast,
             Direction.SouthWest,
             Direction.SouthEast
-        }
+        };
 
         public King(EPlayer color)
         {
@@ -30,5 +31,10 @@ namespace CheckersCSharp.Models.Pieces
             King copy = new King(Color);
             return copy;
         }
+
+        public override IEnumerable<Move> GetMoves(Position from, Board board)
+        {
+            return MovePositionsInDirs(from, board, dirs).Select(to => new NormalMove(from, to));
+        } 
     }
 }
