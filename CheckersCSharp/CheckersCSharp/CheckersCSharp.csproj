@@ -66,6 +66,7 @@
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Direction.cs" />
     <Compile Include="Models\GameState.cs" />
+    <Compile Include="Models\Moves\CaptureMove.cs" />
     <Compile Include="Models\Moves\Move.cs" />
     <Compile Include="Models\Moves\NormalMove.cs" />
     <Compile Include="Models\MoveType.cs" />

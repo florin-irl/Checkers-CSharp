@@ -3,6 +3,7 @@ using CheckersCSharp.Models.Pieces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,11 +16,17 @@ namespace CheckersCSharp.Models
 
         public bool MultipleJumps { get; set; }
 
+        public int BlackPieces { get; set; }
+
+        public int WhitePieces { get; set; }
+
         public GameState(EPlayer player, Board board)
         {
             CurrentPlayer = player;
             Board = board;
             MultipleJumps = false;
+            BlackPieces = 12;
+            WhitePieces = 12;
 
         }
 
@@ -36,7 +43,20 @@ namespace CheckersCSharp.Models
 
         public void MakeMove(Move move)
         {
-            move.Execute(Board);
+            if(move.Execute(Board))
+            {
+                Position pos = move.ToPos;
+                Piece piece = Board[pos];
+                if(piece.Color == EPlayer.Black)
+                {
+                    BlackPieces--;
+                }
+                else
+                {
+                    WhitePieces--;
+                }
+                //Console.WriteLine("Black: " + BlackPieces + " White: " + WhitePieces);
+            }
             if(!MultipleJumps)
             {
                 CurrentPlayer = CurrentPlayer.Opponent();

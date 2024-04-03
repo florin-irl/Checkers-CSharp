@@ -20,11 +20,24 @@ namespace CheckersCSharp.Models.Moves
             ToPos = toPos;
         }
 
-        public override void Execute(Board board)
+        public override bool Execute(Board board)
         {
-            Piece piece = board[FromPos];
-            board[ToPos] = piece;
-            board[FromPos] = null;
+            if (Math.Abs(FromPos.Row - ToPos.Row) == 2)
+            {
+                Position capturePos = new Position((FromPos.Row + ToPos.Row) / 2, (FromPos.Column + ToPos.Column) / 2);
+                Piece piece = board[FromPos];
+                board[ToPos] = piece;
+                board[FromPos] = null;
+                board[capturePos] = null;
+                return true;
+            }
+            else
+            {
+                Piece piece = board[FromPos];
+                board[ToPos] = piece;
+                board[FromPos] = null;
+                return false;
+            }
         }
     }
 }
