@@ -77,6 +77,7 @@
     <Compile Include="Models\PieceType.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Views\CheckersCursors.cs" />
     <Compile Include="Views\Images.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
