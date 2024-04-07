@@ -65,6 +65,7 @@
     </Compile>
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Direction.cs" />
+    <Compile Include="Models\EndReason.cs" />
     <Compile Include="Models\GameState.cs" />
     <Compile Include="Models\Moves\CaptureMove.cs" />
     <Compile Include="Models\Moves\Move.cs" />
