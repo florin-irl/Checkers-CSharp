@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen"
         Background="#101010">
     <Viewbox>
+        <WrapPanel>
 	    <Grid x:Name="BoardGrid" Width="600" Height="600"
               MouseDown="BoardGrid_MouseDown">
 		    <Grid.Background>
@@ -30,5 +31,7 @@
 
             <ContentControl x:Name="MenuContainer"/>
         </Grid>
+            
+        </WrapPanel>
     </Viewbox>
 </Window>
