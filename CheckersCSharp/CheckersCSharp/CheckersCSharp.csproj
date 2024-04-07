@@ -55,6 +55,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Views\GameOverMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +83,9 @@
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Result.cs" />
     <Compile Include="Views\CheckersCursors.cs" />
+    <Compile Include="Views\GameOverMenu.xaml.cs">
+      <DependentUpon>GameOverMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Images.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
