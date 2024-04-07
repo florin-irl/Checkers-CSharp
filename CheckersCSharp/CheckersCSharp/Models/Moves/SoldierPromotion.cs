@@ -30,12 +30,28 @@ namespace CheckersCSharp.Models.Moves
 
         public override bool Execute(Board board)
         {
-            Piece soldier = board[FromPos];
-            board[FromPos] = null;
+            if(Math.Abs(FromPos.Row - ToPos.Row) == 2)
+            {
+                Position capturePos = new Position((FromPos.Row + ToPos.Row) / 2, (FromPos.Column + ToPos.Column) / 2);
+                Piece soldier = board[FromPos];
+                board[FromPos] = null;
 
-            Piece newKing = CreatePromotionPiece(soldier.Color);
-            board[ToPos] = newKing;
-            return false;
+                Piece newKing = CreatePromotionPiece(soldier.Color);
+                board[ToPos] = newKing;
+
+                board[capturePos] = null;
+                return true;
+            }
+            else
+            {
+                Piece soldier = board[FromPos];
+                board[FromPos] = null;
+
+                Piece newKing = CreatePromotionPiece(soldier.Color);
+                board[ToPos] = newKing;
+                return false;
+            }
+           
         }
     }
 }
