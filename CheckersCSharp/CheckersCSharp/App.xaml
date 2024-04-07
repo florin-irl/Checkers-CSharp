@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:CheckersCSharp"
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
-         
+        <SolidColorBrush x:Key="StrokeColor">#FF191970</SolidColorBrush>
+        <SolidColorBrush x:Key="FillColor">#FF4682B4</SolidColorBrush>
     </Application.Resources>
 </Application>
