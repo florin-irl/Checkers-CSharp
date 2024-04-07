@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CheckersCSharp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,19 +21,38 @@ namespace CheckersCSharp.Views
     /// </summary>
     public partial class GameOverMenu : UserControl
     {
-        public GameOverMenu()
+
+        public event Action<EOption> OptionSelected;
+        public GameOverMenu(GameState gameState)
         {
             InitializeComponent();
+
+            Result result = gameState.result;
+            WinnerText.Text = GetWinnerText(result.Winner);
+            WinnerName.Text = GetReasonText(result.Reason, gameState.CurrentPlayer);
+
+        }
+
+        private static string GetWinnerText(EPlayer winner)
+        {
+            
+            return winner == EPlayer.White ? "White wins!" : "Black wins!";
+            
+        }
+
+        private static string GetReasonText(EEndReason reason, EPlayer currentPlayer)
+        {
+            return reason == EEndReason.WhiteWin ? "Black has no more pieces!" : "White has no more pieces!";
         }
 
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
-
+            OptionSelected?.Invoke(EOption.Restart);
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            OptionSelected?.Invoke(EOption.Exit);
         }
     }
 }
