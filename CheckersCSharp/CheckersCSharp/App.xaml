@@ -4,7 +4,16 @@
              xmlns:local="clr-namespace:CheckersCSharp"
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="StrokeColor">#FF191970</SolidColorBrush>
-        <SolidColorBrush x:Key="FillColor">#FF4682B4</SolidColorBrush>
+        <SolidColorBrush x:Key="StrokeColor">#333333</SolidColorBrush>
+        <SolidColorBrush x:Key="FillColor">#FFFFFF</SolidColorBrush>
+        <SolidColorBrush x:Key="TextColor">#000000</SolidColorBrush>
+        <SolidColorBrush x:Key="ButtonColor">#007BFF</SolidColorBrush>
+
+        <Style TargetType="Border" x:Key="BorderStyle">
+            <Setter Property="BorderThickness" Value="4"/>
+            <Setter Property="BorderBrush" Value="{StaticResource StrokeColor}"/>
+            <Setter Property="Background" Value="{StaticResource FillColor}"/>
+            <Setter Property="CornerRadius" Value="10"/>
+        </Style>
     </Application.Resources>
 </Application>
