@@ -10,6 +10,7 @@ namespace CheckersCSharp.Models
     {
         None,
         Normal,
-        Capture
+        Capture,
+        SoldierPromotion
     }
 }

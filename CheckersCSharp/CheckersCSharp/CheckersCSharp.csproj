@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\Moves\SoldierPromotion.cs" />
     <Compile Include="Views\Option.cs" />
     <Page Include="Views\GameOverMenu.xaml">
       <SubType>Designer</SubType>
