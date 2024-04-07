@@ -13,10 +13,14 @@ namespace CheckersCSharp.Models.Moves
         public override Position FromPos { get; }
         public override Position ToPos { get; }
 
-        public SoldierPromotion(Position from, Position to)
+        private readonly EPieceType newType;
+
+        public SoldierPromotion(Position from, Position to, EPieceType newType)
         {
             FromPos = from;
             ToPos = to;
+            this.newType = newType;
+
         }
 
         private Piece CreatePromotionPiece(EPlayer color)

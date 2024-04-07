@@ -121,10 +121,26 @@ namespace CheckersCSharp
             
             if(moveCache.TryGetValue(pos, out Move move))
             {
-                HandleMove(move);
+                if(move.Type==EMoveType.SoldierPromotion)
+                {
+                    HandlePromotion(move.FromPos, move.ToPos);
+                }
+                else
+                {
+                    HandleMove(move);
+                }
             }
             
           
+        }
+
+        private void HandlePromotion(Position from, Position to)
+        {
+            pieceImages[to.Row,to.Column].Source = Images.GetImage(gameState.CurrentPlayer,EPieceType.Soldier);
+            pieceImages[from.Row, from.Column].Source = null;
+
+            Move promMove = new SoldierPromotion(from, to, EPieceType.King);
+            HandleMove(promMove);
         }
 
         private void HandleMove(Move move)

@@ -36,15 +36,42 @@ namespace CheckersCSharp.Models.Pieces
             return copy;
         }
 
+        private static IEnumerable<Move> PromotionMoves(Position from, Position to)
+        {
+            yield return new SoldierPromotion(from, to, EPieceType.King);
+        }
+
         public override IEnumerable<Move> GetMoves(Position from, Board board)
         {
             if(Color == EPlayer.Black)
             {
-                return MovePositionsInDirs(from, board, blackDirs).Select(to => new NormalMove(from, to));
+                IEnumerable<Position> blackMoves = MovePositionsInDirs(from, board, blackDirs);
+                foreach(Position to in blackMoves)
+                {
+                    if(to.Row == 0)
+                    {
+                        yield return new SoldierPromotion(from, to, EPieceType.King);
+                    }
+                    else
+                    {
+                        yield return new NormalMove(from, to);
+                    }
+                }
             }
             else
             {
-                return MovePositionsInDirs(from, board, whiteDirs).Select(to => new NormalMove(from, to));
+                IEnumerable<Position> whiteMoves = MovePositionsInDirs(from, board, whiteDirs);
+                foreach(Position to in whiteMoves)
+                {
+                    if(to.Row == 7)
+                    {
+                        yield return new SoldierPromotion(from, to, EPieceType.King);
+                    }
+                    else
+                    {
+                        yield return new NormalMove(from, to);
+                    }
+                }
             }
         }
     }
