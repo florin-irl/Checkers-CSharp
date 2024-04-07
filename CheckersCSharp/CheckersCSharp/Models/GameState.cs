@@ -14,6 +14,8 @@ namespace CheckersCSharp.Models
         public Board Board { get; }
         public EPlayer CurrentPlayer { get; private set; }
 
+        public Result result { get; private set; } = null;
+
         public bool MultipleJumps { get; set; }
 
         public int BlackPieces { get; set; }
@@ -51,6 +53,7 @@ namespace CheckersCSharp.Models
             {
                 CurrentPlayer = CurrentPlayer.Opponent();
             }
+            CheckForGameEnd();
             
         }
 
@@ -67,6 +70,25 @@ namespace CheckersCSharp.Models
                 BlackPieces--;
             }
             Console.WriteLine("Black: " + BlackPieces + " White: " + WhitePieces);
+        }
+
+
+        private void CheckForGameEnd()
+        {
+
+            if (BlackPieces == 0)
+            {
+                result = Result.Win(EPlayer.White);
+            }
+            else if (WhitePieces == 0)
+            {
+                result = Result.Win(EPlayer.Black);
+            }
+        }
+
+        public bool IsGameOver()
+        {
+            return result != null;
         }
     }
 }
