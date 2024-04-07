@@ -74,6 +74,12 @@ namespace CheckersCSharp
 
         private void BoardGrid_MouseDown(object sender, MouseButtonEventArgs e)
         {
+
+            if(IsMenuOnScreen())
+            {
+                return;
+            }
+
             Point point = e.GetPosition(BoardGrid);
             Position pos = TransformToSquarePos(point);
 
@@ -126,6 +132,11 @@ namespace CheckersCSharp
             gameState.MakeMove(move);
             DrawBoard(gameState.Board);
             SetCursor(gameState.CurrentPlayer);
+
+            if(gameState.IsGameOver())
+            {
+                ShowGameOverMenu();
+            }
         }
 
         private void CacheMoves(IEnumerable<Move> moves)
@@ -168,6 +179,39 @@ namespace CheckersCSharp
             {
                 Cursor = CheckersCursors.BlackCursor;
             }
+        }
+
+        private bool IsMenuOnScreen()
+        {
+            return MenuContainer.Content != null;
+        }
+
+        private void ShowGameOverMenu()
+        {
+            GameOverMenu menu = new GameOverMenu(gameState);
+            MenuContainer.Content = menu;
+
+            menu.OptionSelected += option =>
+            {
+                if (option == EOption.Restart)
+                {
+                    menu.Content = null;
+                    RestartGame();
+                }
+                else
+                {
+                    Application.Current.Shutdown();
+                }
+            };
+        }
+
+        private void RestartGame()
+        {
+            HideHighlights();
+            moveCache.Clear();
+            gameState = new GameState(EPlayer.Black, Board.Initial());
+            DrawBoard(gameState.Board);
+            SetCursor(gameState.CurrentPlayer);
         }
     }
 }
