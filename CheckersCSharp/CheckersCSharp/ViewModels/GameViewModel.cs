@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using CheckersCSharp.Commands;
 using CheckersCSharp.Models;
 using CheckersCSharp.Models.Moves;
 using CheckersCSharp.Models.Pieces;
@@ -27,7 +28,7 @@ namespace CheckersCSharp.ViewModels
 
         private Position selectedPos = null;
 
-        public GameOverMenu GameOverMenu { get; set; } = null;
+        public GameOverMenuUserControl GameOverMenuUserControl { get; set; } = null;
 
         private Cursor _currentCursor;
         public Cursor CurrentCursor
@@ -165,15 +166,15 @@ namespace CheckersCSharp.ViewModels
         }
         private void ShowGameOverMenu()
         {
-            GameOverMenu = new GameOverMenu(_gameLogic);
-            OnPropertyChanged(nameof(GameOverMenu));
+            GameOverMenuUserControl = new GameOverMenuUserControl(_gameLogic.Result, _gameLogic.CurrentPlayer);
+            OnPropertyChanged(nameof(GameOverMenuUserControl));
 
-            GameOverMenu.OptionSelected += option =>
+            GameOverMenuUserControl.OptionSelected += option =>
             {
                 if (option == EOption.Restart)
                 {
-                    GameOverMenu.Content = null;
-                    OnPropertyChanged(nameof(GameOverMenu));
+                    GameOverMenuUserControl.Content = null;
+                    OnPropertyChanged(nameof(GameOverMenuUserControl));
                     RestartGame();
                 }
                 else

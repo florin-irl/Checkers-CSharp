@@ -13,37 +13,24 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CheckersCSharp.ViewModels;
 
 namespace CheckersCSharp.Views
 {
     /// <summary>
-    /// Interaction logic for GameOverMenu.xaml
+    /// Interaction logic for GameOverMenuUserControl.xaml
     /// </summary>
-    public partial class GameOverMenu : UserControl
+    public partial class GameOverMenuUserControl : UserControl
     {
 
         public event Action<EOption> OptionSelected;
-        public GameOverMenu(GameLogic gameLogic)
+        public GameOverMenuUserControl(Result result, EPlayer currentPlayer)
         {
             InitializeComponent();
 
-            Result result = gameLogic.Result;
-            WinnerText.Text = GetWinnerText(result.Winner);
-            WinnerName.Text = GetReasonText(result.Reason, gameLogic.CurrentPlayer);
-
+            DataContext = new GameOverMenuViewModel(result, currentPlayer);
         }
 
-        private static string GetWinnerText(EPlayer winner)
-        {
-            
-            return winner == EPlayer.White ? "White wins!" : "Black wins!";
-            
-        }
-
-        private static string GetReasonText(EEndReason reason, EPlayer currentPlayer)
-        {
-            return reason == EEndReason.WhiteWin ? "Black has no more pieces!" : "White has no more pieces!";
-        }
 
         private void Restart_Click(object sender, RoutedEventArgs e)
         {

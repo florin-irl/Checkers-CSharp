@@ -72,7 +72,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                <ContentControl x:Name="MenuContainer" Content="{Binding GameOverMenu}" />
+                <ContentControl x:Name="MenuContainer" Content="{Binding GameOverMenuUserControl}" />
             </Grid>
             
         </StackPanel>
