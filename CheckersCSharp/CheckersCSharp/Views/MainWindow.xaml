@@ -31,25 +31,49 @@
                 </Menu>
             </StackPanel>
             <Grid x:Name="BoardGrid" Width="600" Height="600"
-              MouseDown="BoardGrid_MouseDown">
-		    <Grid.Background>
-			    <ImageBrush ImageSource="Assets/Board.png"/>
-		    </Grid.Background>
+              MouseDown="BoardGrid_MouseDown" Cursor="{Binding CurrentCursor}">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Assets/Board.png"/>
+                </Grid.Background>
 
-            <UniformGrid x:Name="HighlightGrid"
-                         Rows="8"
-                         Columns="8">
-                
-            </UniformGrid>
 
-            <UniformGrid x:Name="PieceGrid"
-                         Rows="8"
-                         Columns="8"
-                         RenderOptions.BitmapScalingMode="HighQuality">
-            </UniformGrid>
 
-            <ContentControl x:Name="MenuContainer"/>
-        </Grid>
+                <ItemsControl ItemsSource="{Binding Highlights}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid x:Name="HighlightGrid"
+                                         Rows="8"
+                                         Columns="8">
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Rectangle Fill="{Binding }" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ItemsControl ItemsSource="{Binding PieceImages}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <UniformGrid x:Name="PieceGrid"
+                                         Rows="8"
+                                         Columns="8"
+                                         RenderOptions.BitmapScalingMode="HighQuality">
+
+                            </UniformGrid>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding }" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ContentControl x:Name="MenuContainer" Content="{Binding GameOverMenu}" />
+            </Grid>
             
         </StackPanel>
     </Viewbox>
