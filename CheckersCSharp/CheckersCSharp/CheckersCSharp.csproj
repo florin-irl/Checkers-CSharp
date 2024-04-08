@@ -55,8 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\Moves\SoldierPromotion.cs" />
-    <Compile Include="Views\Option.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Services\Moves\SoldierPromotion.cs" />
+    <Compile Include="Models\Option.cs" />
     <Page Include="Views\GameOverMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -72,23 +73,24 @@
     <Compile Include="Models\Board.cs" />
     <Compile Include="Models\Direction.cs" />
     <Compile Include="Models\EndReason.cs" />
-    <Compile Include="Models\GameState.cs" />
-    <Compile Include="Models\Moves\CaptureMove.cs" />
-    <Compile Include="Models\Moves\Move.cs" />
-    <Compile Include="Models\Moves\NormalMove.cs" />
+    <Compile Include="Services\GameLogic.cs" />
+    <Compile Include="Services\Moves\Move.cs" />
+    <Compile Include="Services\Moves\NormalMove.cs" />
     <Compile Include="Models\MoveType.cs" />
-    <Compile Include="Models\Pieces\King.cs" />
-    <Compile Include="Models\Pieces\Piece.cs" />
-    <Compile Include="Models\Pieces\Soldier.cs" />
+    <Compile Include="Services\Pieces\King.cs" />
+    <Compile Include="Services\Pieces\Piece.cs" />
+    <Compile Include="Services\Pieces\Soldier.cs" />
     <Compile Include="Models\PieceType.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Result.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="Views\CheckersCursors.cs" />
     <Compile Include="Views\GameOverMenu.xaml.cs">
       <DependentUpon>GameOverMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Images.cs" />
+    <Compile Include="ViewModels\Images.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -120,9 +122,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Views\Assets\Board.png" />
   </ItemGroup>

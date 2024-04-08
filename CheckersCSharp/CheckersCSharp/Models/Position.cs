@@ -13,14 +13,6 @@ namespace CheckersCSharp.Models
 
         public Position(int row, int column) { Row = row; Column = column; }
 
-        public EPlayer SquareColor()
-        {
-            if ((Row + Column) % 2 == 0)
-                return EPlayer.White;
-            else
-                return EPlayer.Black;
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Position position &&

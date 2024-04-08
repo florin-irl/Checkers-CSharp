@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace CheckersCSharp.Models
 {
-    public class GameState
+    public class GameLogic
     {
         public Board Board { get; }
         public EPlayer CurrentPlayer { get; private set; }
 
-        public Result result { get; private set; } = null;
+        public Result Result { get; private set; } = null;
 
         public bool MultipleJumps { get; set; }
 
@@ -22,14 +22,13 @@ namespace CheckersCSharp.Models
 
         public int WhitePieces { get; set; }
 
-        public GameState(EPlayer player, Board board)
+        public GameLogic(EPlayer player, Board board)
         {
             CurrentPlayer = player;
             Board = board;
             MultipleJumps = false;
             BlackPieces = 12;
             WhitePieces = 12;
-
         }
 
         public IEnumerable<Move> LegalMovesForPiece(Position pos)
@@ -78,17 +77,17 @@ namespace CheckersCSharp.Models
 
             if (BlackPieces == 0)
             {
-                result = Result.Win(EPlayer.White);
+                Result = Result.Win(EPlayer.White);
             }
             else if (WhitePieces == 0)
             {
-                result = Result.Win(EPlayer.Black);
+                Result = Result.Win(EPlayer.Black);
             }
         }
 
         public bool IsGameOver()
         {
-            return result != null;
+            return Result != null;
         }
     }
 }

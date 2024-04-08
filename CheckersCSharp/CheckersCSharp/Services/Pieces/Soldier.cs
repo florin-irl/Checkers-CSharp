@@ -11,7 +11,7 @@ namespace CheckersCSharp.Models.Pieces
     {
         public override EPieceType Type => EPieceType.Soldier;
 
-       public override EPlayer Color { get; }
+        public override EPlayer Color { get; }
 
         private static readonly Direction[] blackDirs = new Direction[]
         {

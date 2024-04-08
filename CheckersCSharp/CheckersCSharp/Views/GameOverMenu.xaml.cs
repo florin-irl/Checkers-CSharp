@@ -23,13 +23,13 @@ namespace CheckersCSharp.Views
     {
 
         public event Action<EOption> OptionSelected;
-        public GameOverMenu(GameState gameState)
+        public GameOverMenu(GameLogic gameLogic)
         {
             InitializeComponent();
 
-            Result result = gameState.result;
+            Result result = gameLogic.Result;
             WinnerText.Text = GetWinnerText(result.Winner);
-            WinnerName.Text = GetReasonText(result.Reason, gameState.CurrentPlayer);
+            WinnerName.Text = GetReasonText(result.Reason, gameLogic.CurrentPlayer);
 
         }
 

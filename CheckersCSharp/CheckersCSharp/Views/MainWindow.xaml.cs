@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CheckersCSharp.ViewModels;
 
 
 namespace CheckersCSharp
@@ -29,18 +30,18 @@ namespace CheckersCSharp
         private readonly Rectangle[,] highlights = new Rectangle[8, 8];
         private readonly Dictionary<Position, Move> moveCache = new Dictionary<Position, Move>();
 
-        private GameState gameState;
+        private GameViewModel _gameViewModel;
         private Position selectedPos = null;
         public MainWindow()
         {
             InitializeComponent();
             InitializeBoard();
 
-            gameState = new GameState(EPlayer.Black, Board.Initial());
+            _gameLogic = new GameLogic(EPlayer.Black, Board.Initial());
 
-            DrawBoard(gameState.Board);
+            DrawBoard(_gameLogic.Board);
 
-            SetCursor(gameState.CurrentPlayer);
+            SetCursor(_gameLogic.CurrentPlayer);
         }
 
         private void InitializeBoard()
@@ -104,7 +105,7 @@ namespace CheckersCSharp
 
         private void OnFromPositionSelected(Position pos)
         {
-            IEnumerable<Move> moves = gameState.LegalMovesForPiece(pos);
+            IEnumerable<Move> moves = _gameLogic.LegalMovesForPiece(pos);
 
             if(moves.Any())
             {
@@ -136,7 +137,7 @@ namespace CheckersCSharp
 
         private void HandlePromotion(Position from, Position to)
         {
-            pieceImages[to.Row,to.Column].Source = Images.GetImage(gameState.CurrentPlayer,EPieceType.Soldier);
+            pieceImages[to.Row,to.Column].Source = Images.GetImage(_gameLogic.CurrentPlayer,EPieceType.Soldier);
             pieceImages[from.Row, from.Column].Source = null;
 
             Move promMove = new SoldierPromotion(from, to, EPieceType.King);
@@ -145,11 +146,11 @@ namespace CheckersCSharp
 
         private void HandleMove(Move move)
         {
-            gameState.MakeMove(move);
-            DrawBoard(gameState.Board);
-            SetCursor(gameState.CurrentPlayer);
+            _gameLogic.MakeMove(move);
+            DrawBoard(_gameLogic.Board);
+            SetCursor(_gameLogic.CurrentPlayer);
 
-            if(gameState.IsGameOver())
+            if(_gameLogic.IsGameOver())
             {
                 ShowGameOverMenu();
             }
@@ -204,7 +205,7 @@ namespace CheckersCSharp
 
         private void ShowGameOverMenu()
         {
-            GameOverMenu menu = new GameOverMenu(gameState);
+            GameOverMenu menu = new GameOverMenu(_gameLogic);
             MenuContainer.Content = menu;
 
             menu.OptionSelected += option =>
@@ -225,9 +226,9 @@ namespace CheckersCSharp
         {
             HideHighlights();
             moveCache.Clear();
-            gameState = new GameState(EPlayer.Black, Board.Initial());
-            DrawBoard(gameState.Board);
-            SetCursor(gameState.CurrentPlayer);
+            _gameLogic = new GameLogic(EPlayer.Black, Board.Initial());
+            DrawBoard(_gameLogic.Board);
+            SetCursor(_gameLogic.CurrentPlayer);
         }
     }
 }

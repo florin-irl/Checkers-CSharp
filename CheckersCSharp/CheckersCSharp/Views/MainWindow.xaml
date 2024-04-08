@@ -4,11 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CheckersCSharp"
+        xmlns:viewModels="clr-namespace:CheckersCSharp.ViewModels"
         mc:Ignorable="d"
         Title="Checkers-CSharp-Laika-Software" Width="600" SizeToContent="Height"
         Icon="Assets/Icon.ico"
         WindowStartupLocation="CenterScreen"
         Background="#101010">
+    <Window.DataContext>
+        <viewModels:GameViewModel/>
+    </Window.DataContext>
     <Viewbox>
 	    
         <StackPanel>
