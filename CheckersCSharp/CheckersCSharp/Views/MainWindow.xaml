@@ -10,8 +10,23 @@
         WindowStartupLocation="CenterScreen"
         Background="#101010">
     <Viewbox>
-        <WrapPanel>
-	    <Grid x:Name="BoardGrid" Width="600" Height="600"
+	    
+        <StackPanel>
+	        <StackPanel VerticalAlignment="Top">
+                <Menu Width="Auto" Height="20">
+                    <MenuItem Header="_File">
+                        <MenuItem x:Name="NewGame" Header="N_ewGame" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="SaveGame" Header="_SaveGame" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="LoadGame" Header="_LoadGame" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="AllowMultipleJumps" Header="_AllowMultipleJumps" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="Statistics" Header="_Statistics" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="Exit" Header="_Exit" HorizontalAlignment="Left" Width="200" />
+
+                    </MenuItem>
+                    
+                </Menu>
+            </StackPanel>
+            <Grid x:Name="BoardGrid" Width="600" Height="600"
               MouseDown="BoardGrid_MouseDown">
 		    <Grid.Background>
 			    <ImageBrush ImageSource="Assets/Board.png"/>
@@ -32,6 +47,7 @@
             <ContentControl x:Name="MenuContainer"/>
         </Grid>
             
-        </WrapPanel>
+        </StackPanel>
     </Viewbox>
+
 </Window>
