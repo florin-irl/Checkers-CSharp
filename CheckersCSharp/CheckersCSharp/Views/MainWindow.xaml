@@ -19,10 +19,16 @@
 	        <StackPanel VerticalAlignment="Top">
                 <Menu Width="Auto" Height="20">
                     <MenuItem Header="_File">
-                        <MenuItem x:Name="NewGame" Header="N_ewGame" HorizontalAlignment="Left" Width="200" />
-                        <MenuItem x:Name="SaveGame" Header="_SaveGame" HorizontalAlignment="Left" Width="200" />
-                        <MenuItem x:Name="LoadGame" Header="_LoadGame" HorizontalAlignment="Left" Width="200" />
-                        <MenuItem x:Name="AllowMultipleJumps" Header="_AllowMultipleJumps" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="NewGame" Header="N_ewGame" HorizontalAlignment="Left" Width="200"
+                                  Command="{Binding NewGameCommand}"/>
+                        <MenuItem x:Name="SaveGame" Header="_SaveGame" HorizontalAlignment="Left" Width="200" 
+                                  Command="{Binding SaveGameCommand}"/>
+                        <MenuItem x:Name="LoadGame" Header="_LoadGame" HorizontalAlignment="Left" Width="200"
+                                  Command="{Binding LoadGameCommand}"/>
+                        <MenuItem x:Name="AllowMultipleJumps" Header="_AllowMultipleJumps" HorizontalAlignment="Left" Width="200"
+                                  Command="{Binding ToggleAllowMultipleJumpsCommand}"/>
+                        <MenuItem x:Name="SwitchTurn" Header="_SwitchTurn" HorizontalAlignment="Left" Width="200"
+                                  Command="{Binding SwitchTurnCommand}"/>
                         <MenuItem x:Name="Statistics" Header="_Statistics" HorizontalAlignment="Left" Width="200" />
                         <MenuItem x:Name="Exit" Header="_Exit" HorizontalAlignment="Left" Width="200" />
 

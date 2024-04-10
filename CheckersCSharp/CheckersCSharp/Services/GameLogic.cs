@@ -5,14 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using CheckersCSharp.Services;
 
 namespace CheckersCSharp.Models
 {
     public class GameLogic
     {
-        public Board Board { get; }
-        public EPlayer CurrentPlayer { get; private set; }
+        public Board Board { get; private set; }
+        public EPlayer CurrentPlayer { get;  set; }
 
         public Result Result { get; private set; } = null;
 
@@ -47,11 +49,37 @@ namespace CheckersCSharp.Models
             if(move.Execute(Board))
             {
                 UpdatePieceCounter(move);
+                if (!MultipleJumps)
+                {
+                    CurrentPlayer = CurrentPlayer.Opponent();
+                }
+                else
+                {
+
+                    IEnumerable<Move> possibleMoves = LegalMovesForPiece(move.ToPos);
+                    List<Move> updatedMoves = new List<Move>();
+
+                    foreach (Move m in possibleMoves)
+                    {
+                        Position capturePos = new Position((m.FromPos.Row + m.ToPos.Row) / 2, (m.FromPos.Column + m.ToPos.Column) / 2);
+                        if (Board[capturePos]
+                            != null)
+                        {
+                            updatedMoves.Add(m);
+                        }
+                    }
+
+                    if (updatedMoves.Count == 0)
+                    {
+                        CurrentPlayer = CurrentPlayer.Opponent();
+                    }
+                }
             }
-            if(!MultipleJumps)
+            else
             {
                 CurrentPlayer = CurrentPlayer.Opponent();
             }
+            
             CheckForGameEnd();
             
         }
@@ -88,6 +116,23 @@ namespace CheckersCSharp.Models
         public bool IsGameOver()
         {
             return Result != null;
+        }
+
+        public void SaveGame(string filePath)
+        {
+            var gameConfiguration = new GameConfiguration(this);
+            JSONUtility.SerializeGame(gameConfiguration, filePath);
+        }
+
+        public void LoadGame(string filePath)
+        {
+            var gameConfiguration = JSONUtility.DeserializeGame(filePath);
+            Board = new Board(gameConfiguration.Pieces);
+            CurrentPlayer = gameConfiguration.CurrentPlayer;
+            MultipleJumps = gameConfiguration.MultiJumps;
+            BlackPieces = gameConfiguration.BlackPieces;
+            WhitePieces = gameConfiguration.WhitePieces;
+
         }
     }
 }

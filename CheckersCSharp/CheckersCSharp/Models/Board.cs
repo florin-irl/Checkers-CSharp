@@ -36,6 +36,22 @@ namespace CheckersCSharp.Models
             }
         }
 
+        public Board(IReadOnlyList<Piece> pieces)
+        {
+            for (int row = 0; row < 8; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    this[row, col] = pieces[row * 8 + col];
+                }
+            }
+        }
+
+        public Board()
+        {
+
+        }
+
         public static Board Initial()
         {
             Board board = new Board();

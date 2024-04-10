@@ -14,13 +14,37 @@ using CheckersCSharp.Commands;
 using CheckersCSharp.Models;
 using CheckersCSharp.Models.Moves;
 using CheckersCSharp.Models.Pieces;
+using CheckersCSharp.Services;
 using CheckersCSharp.Views;
+using Microsoft.Win32;
 
 namespace CheckersCSharp.ViewModels
 {
     public class GameViewModel : BaseViewModel
     {
         private GameLogic _gameLogic;
+
+        public ICommand ToggleAllowMultipleJumpsCommand { get; }
+        public ICommand NewGameCommand { get; }
+
+        public ICommand SwitchTurnCommand { get; }
+
+        public ICommand SaveGameCommand { get; }
+
+        public ICommand LoadGameCommand { get; }
+
+        public void SwitchTurn()
+        {
+            _gameLogic.CurrentPlayer = _gameLogic.CurrentPlayer == EPlayer.Black ? EPlayer.White : EPlayer.Black;
+            DrawBoard(_gameLogic.Board);
+            CurrentCursor = _gameLogic.CurrentPlayer == EPlayer.Black ? CheckersCursors.BlackCursor : CheckersCursors.WhiteCursor;
+            if (_gameLogic.IsGameOver())
+            {
+                ShowGameOverMenu();
+            }
+        }
+
+
         public ObservableCollection<Image> PieceImages { get; set; } = new ObservableCollection<Image>();
         public ObservableCollection<Rectangle> Highlights { get; set; } = new ObservableCollection<Rectangle>();
 
@@ -28,6 +52,7 @@ namespace CheckersCSharp.ViewModels
 
         private Position selectedPos = null;
 
+        private GameOperations _gameOperations;
         public GameOverMenuUserControl GameOverMenuUserControl { get; set; } = null;
 
         private Cursor _currentCursor;
@@ -41,9 +66,24 @@ namespace CheckersCSharp.ViewModels
             }
         }
 
+        public void ToggleAllowMultipleJumps()
+        {
+            // Flip the value of your bool property in GameLogic
+            _gameLogic.MultipleJumps = !_gameLogic.MultipleJumps;
+        }
+
+
         public GameViewModel()
         {
             _gameLogic = new GameLogic(EPlayer.Black, Board.Initial());
+
+            _gameOperations = new GameOperations(this);
+
+            ToggleAllowMultipleJumpsCommand = new RelayCommand(param => _gameOperations.ToggleAllowMultipleJumps());
+            NewGameCommand = new RelayCommand(param => _gameOperations.NewGame());
+            SwitchTurnCommand = new RelayCommand(param => _gameOperations.SwitchTurn());
+            SaveGameCommand = new RelayCommand(param => _gameOperations.SaveGame());
+            LoadGameCommand = new RelayCommand(param => _gameOperations.LoadGame());
 
             InitializeBoard();
 
@@ -51,6 +91,38 @@ namespace CheckersCSharp.ViewModels
 
             _currentCursor = _gameLogic.CurrentPlayer == EPlayer.Black ? CheckersCursors.BlackCursor : CheckersCursors.WhiteCursor;
         }
+
+        public void SaveGame()
+        {
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Checker Game Files (*.ck)|*.ck",
+                DefaultExt = "ck",
+                AddExtension = true
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                _gameLogic.SaveGame(saveFileDialog.FileName);
+            }
+        }
+
+        public void LoadGame()
+        {
+            var openFileDialog = new OpenFileDialog
+            {
+                Filter = "Checker Game Files (*.ck)|*.ck",
+                DefaultExt = "ck",
+                AddExtension = true
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                _gameLogic.LoadGame(openFileDialog.FileName);
+                DrawBoard(_gameLogic.Board);
+                CurrentCursor = _gameLogic.CurrentPlayer == EPlayer.Black ? CheckersCursors.BlackCursor : CheckersCursors.WhiteCursor;
+            }
+        }
+        
+        
 
         private void InitializeBoard()
         {
@@ -184,7 +256,7 @@ namespace CheckersCSharp.ViewModels
             };
         }
 
-        private void RestartGame()
+        public void RestartGame()
         {
             HideHighlights();
             moveCache.Clear();
@@ -204,5 +276,9 @@ namespace CheckersCSharp.ViewModels
                 OnToPositionSelected(pos);
             }
         }
+
+       
+    
+
     }
 }
