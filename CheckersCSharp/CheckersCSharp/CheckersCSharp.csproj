@@ -89,6 +89,10 @@
     <Compile Include="Services\JSONUtility.cs" />
     <Compile Include="Services\Moves\SoldierPromotion.cs" />
     <Compile Include="Models\Option.cs" />
+    <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\GameOverMenuUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +123,9 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GameOverMenuViewModel.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CheckersCursors.cs" />
     <Compile Include="Views\GameOverMenuUserControl.xaml.cs">
       <DependentUpon>GameOverMenuUserControl.xaml</DependentUpon>
@@ -156,7 +163,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Views\Assets\9fd5ac3b-95f8-472b-afd7-5e02d8a38aff.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Views\Assets\Board.png" />
   </ItemGroup>

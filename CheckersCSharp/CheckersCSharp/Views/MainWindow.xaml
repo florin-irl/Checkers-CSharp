@@ -26,14 +26,18 @@
                         <MenuItem x:Name="LoadGame" Header="_LoadGame" HorizontalAlignment="Left" Width="200"
                                   Command="{Binding LoadGameCommand}"/>
                         <MenuItem x:Name="AllowMultipleJumps" Header="_AllowMultipleJumps" HorizontalAlignment="Left" Width="200"
-                                  Command="{Binding ToggleAllowMultipleJumpsCommand}"/>
+                                  Command="{Binding ToggleAllowMultipleJumpsCommand}"
+                                  IsCheckable="True"/>
                         <MenuItem x:Name="SwitchTurn" Header="_SwitchTurn" HorizontalAlignment="Left" Width="200"
                                   Command="{Binding SwitchTurnCommand}"/>
                         <MenuItem x:Name="Statistics" Header="_Statistics" HorizontalAlignment="Left" Width="200" />
                         <MenuItem x:Name="Exit" Header="_Exit" HorizontalAlignment="Left" Width="200" />
 
                     </MenuItem>
-                    
+
+                    <MenuItem Header="_Help">
+                        <MenuItem x:Name="About" Header="_About" HorizontalAlignment="Left" Width="200" Click="About_OnClick" />
+                    </MenuItem>
                 </Menu>
             </StackPanel>
             <Grid x:Name="BoardGrid" Width="600" Height="600"

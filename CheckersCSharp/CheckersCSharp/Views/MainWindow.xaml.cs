@@ -62,5 +62,11 @@ namespace CheckersCSharp
         {
             return MenuContainer.Content != null;
         }
+
+        private void About_OnClick(object sender, RoutedEventArgs e)
+        {
+            var about = new About();
+            about.ShowDialog();
+        }
     }
 }
