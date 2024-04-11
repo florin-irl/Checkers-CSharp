@@ -279,6 +279,7 @@ namespace CheckersCSharp.ViewModels
                     GameOverMenuUserControl.Content = null;
                     OnPropertyChanged(nameof(GameOverMenuUserControl));
                     RestartGame();
+                    
                 }
                 else
                 {
@@ -294,6 +295,7 @@ namespace CheckersCSharp.ViewModels
             _gameLogic = new GameLogic(EPlayer.Black, Board.Initial());
             DrawBoard(_gameLogic.Board);
             CurrentCursor = _gameLogic.CurrentPlayer == EPlayer.Black ? CheckersCursors.BlackCursor : CheckersCursors.WhiteCursor;
+
         }
 
         public void OnBoardGridClicked(Position pos)

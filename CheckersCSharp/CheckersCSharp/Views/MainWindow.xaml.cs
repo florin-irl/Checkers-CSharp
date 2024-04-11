@@ -60,7 +60,7 @@ namespace CheckersCSharp
 
         private bool IsMenuOnScreen()
         {
-            return MenuContainer.Content != null;
+            return false;
         }
 
         private void About_OnClick(object sender, RoutedEventArgs e)
