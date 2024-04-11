@@ -38,6 +38,10 @@ namespace CheckersCSharp.ViewModels
 
         public void SwitchTurn()
         {
+            if (!_gameLogic.MultipleJumps)
+            {
+                return;
+            }
             _gameLogic.CurrentPlayer = _gameLogic.CurrentPlayer == EPlayer.Black ? EPlayer.White : EPlayer.Black;
             DrawBoard(_gameLogic.Board);
             CurrentCursor = _gameLogic.CurrentPlayer == EPlayer.Black ? CheckersCursors.BlackCursor : CheckersCursors.WhiteCursor;
