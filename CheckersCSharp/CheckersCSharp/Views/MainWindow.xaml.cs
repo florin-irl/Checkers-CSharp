@@ -74,5 +74,10 @@ namespace CheckersCSharp
             var statistics = new Results();
             statistics.ShowDialog();
         }
+
+        private void Exit_OnClick(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
