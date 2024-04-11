@@ -68,5 +68,11 @@ namespace CheckersCSharp
             var about = new About();
             about.ShowDialog();
         }
+
+        private void Statistics_OnClick(object sender, RoutedEventArgs e)
+        {
+            var statistics = new Results();
+            statistics.ShowDialog();
+        }
     }
 }

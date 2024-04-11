@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,8 @@ namespace CheckersCSharp.ViewModels
     public class GameViewModel : BaseViewModel
     {
         private GameLogic _gameLogic;
+        public string BlackWins { get; set; }
+        public string WhiteWins { get; set; }
 
         public ICommand ToggleAllowMultipleJumpsCommand { get; }
         public ICommand NewGameCommand { get; }
@@ -90,6 +93,12 @@ namespace CheckersCSharp.ViewModels
             DrawBoard(_gameLogic.Board);
 
             _currentCursor = _gameLogic.CurrentPlayer == EPlayer.Black ? CheckersCursors.BlackCursor : CheckersCursors.WhiteCursor;
+
+            using (StreamReader sr = new StreamReader("ScoreBoard.txt"))
+            {
+                BlackWins = sr.ReadLine();
+                WhiteWins = sr.ReadLine();
+            }
         }
 
         public void SaveGame()
@@ -240,6 +249,24 @@ namespace CheckersCSharp.ViewModels
         {
             GameOverMenuUserControl = new GameOverMenuUserControl(_gameLogic.Result, _gameLogic.CurrentPlayer);
             OnPropertyChanged(nameof(GameOverMenuUserControl));
+            if (_gameLogic.Result.Winner == EPlayer.Black)
+            {
+                int value = int.Parse(BlackWins);
+                value++;
+                BlackWins = value.ToString();
+            }
+            else
+            {
+                int value = int.Parse(WhiteWins);
+                value++;
+                WhiteWins = value.ToString();
+            }
+
+            using (StreamWriter sw = new StreamWriter("ScoreBoard.txt"))
+            {
+                sw.WriteLine(BlackWins);
+                sw.WriteLine(WhiteWins);
+            }
 
             GameOverMenuUserControl.OptionSelected += option =>
             {

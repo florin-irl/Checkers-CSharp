@@ -30,7 +30,7 @@
                                   IsCheckable="True"/>
                         <MenuItem x:Name="SwitchTurn" Header="_SwitchTurn" HorizontalAlignment="Left" Width="200"
                                   Command="{Binding SwitchTurnCommand}"/>
-                        <MenuItem x:Name="Statistics" Header="_Statistics" HorizontalAlignment="Left" Width="200" />
+                        <MenuItem x:Name="Statistics" Header="_Statistics" HorizontalAlignment="Left" Width="200" Click="Statistics_OnClick"/>
                         <MenuItem x:Name="Exit" Header="_Exit" HorizontalAlignment="Left" Width="200" />
 
                     </MenuItem>
